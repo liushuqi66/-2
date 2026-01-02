@@ -1,0 +1,4 @@
+# common 模块不需要自动配置
+spring:
+  main:
+    web-application-type: none
