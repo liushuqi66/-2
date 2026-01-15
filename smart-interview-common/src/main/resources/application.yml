@@ -1,4 +1,5 @@
-# common 模块不需要自动配置
 spring:
+  application:
+    name: smart-interview-common
   main:
     web-application-type: none
