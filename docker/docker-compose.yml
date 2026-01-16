@@ -1,77 +1,34 @@
+version: '3.8'
 services:
-  # MySQL 数据库
   mysql:
     image: mysql:8.0
     container_name: smart-interview-mysql
-    restart: always
+    ports: ["3307:3306"]
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root123
       MYSQL_DATABASE: smart_interview
-      TZ: Asia/Shanghai
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-      - ../smart-interview-common/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-      - --default-authentication-plugin=mysql_native_password
-    networks:
-      - smart-interview-net
-
-  # Redis 缓存
+    volumes: [mysql-data:/var/lib/mysql]
+    restart: unless-stopped
+    healthcheck: {test: ["CMD","mysqladmin","ping","-h","localhost"], interval: 10s, timeout: 5s, retries: 3}
   redis:
     image: redis:7-alpine
     container_name: smart-interview-redis
-    restart: always
-    ports:
-      - "6379:6379"
-    command: redis-server --appendonly yes
-    volumes:
-      - redis-data:/data
-    networks:
-      - smart-interview-net
-
-  # RabbitMQ 消息队列
+    ports: ["6379:6379"]
+    volumes: [redis-data:/data]
+    restart: unless-stopped
+    healthcheck: {test: ["CMD","redis-cli","ping"], interval: 10s, timeout: 3s, retries: 3}
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: smart-interview-rabbitmq
-    restart: always
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    ports:
-      - "5672:5672"    # AMQP
-      - "15672:15672"  # Management UI
-    volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
-    networks:
-      - smart-interview-net
-
-  # Nacos 注册中心 & 配置中心
+    ports: ["5672:5672","15672:15672"]
+    environment: {RABBITMQ_DEFAULT_USER: admin, RABBITMQ_DEFAULT_PASS: admin}
+    restart: unless-stopped
   nacos:
     image: nacos/nacos-server:v2.3.0
     container_name: smart-interview-nacos
-    restart: always
-    environment:
-      MODE: standalone
-      PREFER_HOST_MODE: hostname
-      NACOS_AUTH_ENABLE: "false"
-      JVM_XMS: 256m
-      JVM_XMX: 256m
-      JVM_XMN: 128m
-    ports:
-      - "8848:8848"
-      - "9848:9848"
-    networks:
-      - smart-interview-net
-
+    ports: ["8848:8848","9848:9848"]
+    environment: {MODE: standalone}
+    restart: unless-stopped
 volumes:
   mysql-data:
   redis-data:
-  rabbitmq-data:
-
-networks:
-  smart-interview-net:
-    driver: bridge
