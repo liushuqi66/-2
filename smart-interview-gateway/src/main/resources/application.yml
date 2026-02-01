@@ -1,129 +1,14 @@
 server:
   port: 8080
-
 spring:
   application:
     name: smart-interview-gateway
-  config:
-    import: optional:nacos:smart-interview-gateway.yaml
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-        namespace: public
-      config:
-        server-addr: localhost:8848
-        file-extension: yaml
-        namespace: public
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
-      # 全局 HTTP 客户端超时配置（Netty）
-      httpclient:
-        connect-timeout: 5000
-        response-timeout: 30s
-        pool:
-          type: elastic
-          max-idle-time: 60s
-      routes:
-        # 首页路由 - 重定向到 Knife4j 文档页面
-        - id: index-redirect
-          uri: no://op
-          predicates:
-            - Path=/
-          filters:
-            - RedirectTo=302, /doc.html
-        # Knife4j 文档页面（由 knife4j-gateway-starter 提供）
-        - id: knife4j-ui
-          uri: lb://smart-interview-user
-          predicates:
-            - Path=/doc.html,/webjars/**
-        # 用户服务 v3/api-docs 转发
-        - id: user-api-docs
-          uri: lb://smart-interview-user
-          predicates:
-            - Path=/user/v3/api-docs
-          filters:
-            - RewritePath=/user/v3/api-docs, /v3/api-docs
-        # 面试服务 v3/api-docs 转发
-        - id: interview-api-docs
-          uri: lb://smart-interview-interview
-          predicates:
-            - Path=/interview/v3/api-docs
-          filters:
-            - RewritePath=/interview/v3/api-docs, /v3/api-docs
-        # AI服务 v3/api-docs 转发
-        - id: ai-api-docs
-          uri: lb://smart-interview-ai
-          predicates:
-            - Path=/ai/v3/api-docs
-          filters:
-            - RewritePath=/ai/v3/api-docs, /v3/api-docs
-        # 用户服务路由
-        - id: user-service
-          uri: lb://smart-interview-user
-          predicates:
-            - Path=/api/user/**
-          filters:
-            - StripPrefix=0
-        # 面试服务路由
-        - id: interview-service
-          uri: lb://smart-interview-interview
-          predicates:
-            - Path=/api/interview/**
-          filters:
-            - StripPrefix=0
-        # AI评估服务路由
-        - id: ai-service
-          uri: lb://smart-interview-ai
-          predicates:
-            - Path=/api/ai/**
-          filters:
-            - StripPrefix=0
-      # 全局跨域
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOriginPatterns: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
-            allowCredentials: true
-
-  # Redis 配置
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      password:
-      timeout: 5000ms
-      lettuce:
-        pool:
-          max-active: 16
-          max-idle: 8
-          min-idle: 4
-
-# Sentinel 配置
-# 注意：如果本地没有运行 Sentinel Dashboard，dashboard 配置会导致 Sentinel 向本地发心跳请求
-spring.cloud.sentinel:
-  transport:
-    # dashboard: localhost:8080  # 暂时注释，本地无 Sentinel Dashboard
-    port: 8719
-  eager: true
-  scg:
-    fallback:
-      mode: response
-      response-status: 429
-      response-body: '{"code":429,"message":"服务繁忙，请稍后重试"}'
-
-# Knife4j 网关聚合配置（禁用 starter 自动端点，由 Knife4jSwaggerConfig 提供 RouterFunction）
-knife4j:
-  gateway:
-    enabled: false
-
-# 日志
-logging:
-  level:
-    com.smartinterview: DEBUG
-    org.springframework.cloud.gateway: INFO
