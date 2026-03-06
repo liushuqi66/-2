@@ -1,16 +1,13 @@
 server:
   port: 8082
-
 spring:
   application:
     name: smart-interview-interview
-  config:
-    import: optional:nacos:smart-interview-interview.yaml
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3307/smart_interview?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5
@@ -18,56 +15,15 @@ spring:
     redis:
       host: localhost
       port: 6379
-      timeout: 5000ms
-      lettuce:
-        pool:
-          max-active: 16
-          max-idle: 8
-          min-idle: 4
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
-    publisher-confirm-type: correlated
-    publisher-returns: true
-    listener:
-      simple:
-        acknowledge-mode: manual
-        prefetch: 10
+    username: admin
+    password: admin
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-        namespace: public
-      config:
-        server-addr: localhost:8848
-        file-extension: yaml
-        namespace: public
-    sentinel:
-      transport:
-        dashboard: localhost:8080
-      eager: true
-
-# MyBatis-Plus
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      id-type: auto
-
-# Knife4j
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-
-knife4j:
-  enable: true
-  setting:
-    language: zh-CN
-
-logging:
-  level:
-    com.smartinterview: DEBUG
