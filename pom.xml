@@ -40,5 +40,6 @@
     </dependencyManagement>
     <modules><module>smart-interview-common</module>
         <module>smart-interview-gateway</module>
-        <module>smart-interview-user</module></modules>
+        <module>smart-interview-user</module>
+        <module>smart-interview-interview</module></modules>
 </project>
