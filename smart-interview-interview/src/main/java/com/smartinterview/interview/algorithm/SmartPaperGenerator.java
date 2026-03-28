@@ -15,6 +15,7 @@ public class SmartPaperGenerator {
 
     public List<Question> generate(List<Question> pool, int count, int level) {
         Map<Integer, Double> ratio = getRatio(level);
+        if (pool == null || pool.isEmpty()) return Collections.emptyList();
         Map<Integer, List<Question>> byDiff = pool.stream().collect(Collectors.groupingBy(Question::getDifficulty));
         Set<String> covered = new HashSet<>();
         List<Question> paper = new ArrayList<>();
