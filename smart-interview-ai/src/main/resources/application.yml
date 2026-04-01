@@ -1,64 +1,24 @@
 server:
   port: 8083
-
 spring:
   application:
     name: smart-interview-ai
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-  config:
-    import: optional:nacos:smart-interview-ai.yaml
   data:
     redis:
       host: localhost
       port: 6379
-      timeout: 5000ms
-      lettuce:
-        pool:
-          max-active: 16
-          max-idle: 8
-          min-idle: 4
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
+    username: admin
+    password: admin
     listener:
       simple:
         acknowledge-mode: manual
-        prefetch: 5
         retry:
           enabled: true
           max-attempts: 3
-          initial-interval: 5000ms
-          multiplier: 2
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-        namespace: public
-      config:
-        server-addr: localhost:8848
-        file-extension: yaml
-        namespace: public
-    sentinel:
-      transport:
-        dashboard: localhost:8080
-      eager: true
-
-logging:
-  level:
-    com.smartinterview: DEBUG
-
-# Knife4j
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-  api-docs:
-    path: /v3/api-docs
-
-knife4j:
-  enable: true
-  setting:
-    language: zh-CN
