@@ -1,4 +1,8 @@
 server:
+  shutdown: graceful
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
   port: 8082
 spring:
   application:
