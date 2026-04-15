@@ -57,6 +57,15 @@ public class UserServiceImpl implements UserService {
         redisTemplate.opsForValue().set("token:" + user.getId(), token, 2, TimeUnit.HOURS);
         redisTemplate.opsForValue().set("user:info:" + user.getId(), username, 30, TimeUnit.MINUTES);
 
+        // Rate limit check (Redis)
+        String rateKey = "login:rate:" + username;
+        String rateCount = redisTemplate.opsForValue().get(rateKey);
+        if (rateCount != null && Integer.parseInt(rateCount) >= 5) {
+            throw new BusinessException(429, "登录尝试过多，请5分钟后再试");
+        }
+        redisTemplate.opsForValue().increment(rateKey);
+        redisTemplate.expire(rateKey, 5, TimeUnit.MINUTES);
+
         log.info("User logged in: {}", username);
         return Result.success(token);
     }
