@@ -24,6 +24,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
+    @org.springframework.web.bind.annotation.ResponseStatus(org.springframework.http.HttpStatus.NOT_FOUND)
     public Result<?> handle404(NoResourceFoundException e) {
         return Result.fail(404, "资源不存在");
     }
