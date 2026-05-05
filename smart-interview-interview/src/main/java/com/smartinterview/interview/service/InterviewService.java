@@ -2,6 +2,10 @@ package com.smartinterview.interview.service;
 import com.smartinterview.common.dto.Result;
 import com.smartinterview.interview.dto.CreateInterviewRequest;
 
+/**
+ * 面试服务接口 - 提供面试全生命周期管理
+ * 包括：创建面试、组卷、答题提交、评估触发
+ */
 public interface InterviewService {
     Result<?> createInterview(Long userId, CreateInterviewRequest req);
     Result<?> startInterview(Long userId, Long interviewId);
