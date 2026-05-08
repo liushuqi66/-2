@@ -4,6 +4,15 @@ server:
     timeout-per-shutdown-phase: 30s
 
   port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
 spring:
   application:
     name: smart-interview-gateway
