@@ -18,6 +18,8 @@ import java.util.Map;
 public class JwtUtil {
     private static final String SECRET = "SmartInterviewJwtSecretKey2024VeryLongEnough";
     private static final long EXPIRE_MILLIS = 2 * 60 * 60 * 1000L;
+    private static final long REDIS_TOKEN_TTL = 2;
+    private static final long REDIS_USER_CACHE_TTL = 30;
     private static final String CLAIM_USER_ID = "userId";
     private static final String CLAIM_USERNAME = "username";
 
