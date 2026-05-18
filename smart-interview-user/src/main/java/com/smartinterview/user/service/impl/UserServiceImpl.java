@@ -37,6 +37,17 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setUsername(username);
+        // Password strength validation
+        if (password.length() < 6 || password.length() > 64) {
+            throw new BusinessException(400, "密码长度6-64字符");
+        }
+        if (!password.matches(".*[A-Z].*") && !password.matches(".*[a-z].*")) {
+            throw new BusinessException(400, "密码必须包含至少一个字母");
+        }
+        if (!password.matches(".*\\d.*")) {
+            throw new BusinessException(400, "密码必须包含至少一个数字");
+        }
+
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
         user.setRole("candidate");
