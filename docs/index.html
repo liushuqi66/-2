@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Interview - 智能面试评估平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🧠</span>
+                Smart Interview
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">核心功能</a></li>
+                <li><a href="#architecture">系统架构</a></li>
+                <li><a href="#tech-stack">技术栈</a></li>
+                <li><a href="#quick-start">快速开始</a></li>
+                <li><a href="https://github.com/liushuqi66/-2" target="_blank" class="btn-nav">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 头部 Hero -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🚀 Spring Cloud 微服务架构</div>
+                <h1>AI 智能面试<br>评估平台</h1>
+                <p class="hero-desc">
+                    基于 Spring Cloud 微服务架构的新一代智能面试系统，
+                    融合 AI 评分、分布式架构与自动化评估，让面试更高效、更公平。
+                </p>
+                <div class="hero-actions">
+                    <a href="#quick-start" class="btn-primary">快速开始</a>
+                    <a href="https://github.com/liushuqi66/-2" target="_blank" class="btn-secondary">查看源码 →</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">微服务模块</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">用户角色</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Java 21</span>
+                        <span class="stat-label">运行环境</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-title">AI 智能评估</div>
+                    <div class="card-desc">自动评分 · 报告生成 · 深度分析</div>
+                </div>
+                <div class="hero-card delay-1">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">异步消息驱动</div>
+                    <div class="card-desc">RabbitMQ · 解耦 · 高吞吐</div>
+                </div>
+                <div class="hero-card delay-2">
+                    <div class="card-icon">🔒</div>
+                    <div class="card-title">安全可靠</div>
+                    <div class="card-desc">JWT 认证 · BCrypt 加密 · XSS 防护</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 核心功能 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">✨ 核心功能</h2>
+            <p class="section-subtitle">全面覆盖面试评估全流程</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>智能组卷算法</h3>
+                    <p>基于难度分层 + 知识点去重的贪心策略，自动生成高质量面试题目组合</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>分布式锁双保险</h3>
+                    <p>Redisson + Redis setIfAbsent 双重机制，保障并发场景数据一致性</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>接口幂等性</h3>
+                    <p>答题提交 Redis 防重复机制，确保数据提交安全可靠</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📨</div>
+                    <h3>异步评估</h3>
+                    <p>RabbitMQ 消息驱动 AI 评分，异步处理提升系统吞吐量</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>API 文档聚合</h3>
+                    <p>Knife4j 网关层聚合多服务文档，统一管理接口规范</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>多角色管理</h3>
+                    <p>管理员 · 面试官 · 求职者，角色权限精细化管控</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 系统架构 -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <h2 class="section-title">🏗️ 系统架构</h2>
+            <p class="section-subtitle">Spring Cloud 微服务架构，模块化设计</p>
+            <div class="arch-grid">
+                <div class="arch-module gateway">
+                    <div class="arch-module-header">
+                        <span class="arch-icon">🌐</span>
+                        <div>
+                            <h4>Gateway 网关</h4>
+                            <span class="port">:8080</span>
+                        </div>
+                    </div>
+                    <p>鉴权 · 限流 · CORS · 日志</p>
+                </div>
+                <div class="arch-module user">
+                    <div class="arch-module-header">
+                        <span class="arch-icon">👤</span>
+                        <div>
+                            <h4>User 用户服务</h4>
+                            <span class="port">:8081</span>
+                        </div>
+                    </div>
+                    <p>注册 · 登录 · 简历管理</p>
+                </div>
+                <div class="arch-module interview">
+                    <div class="arch-module-header">
+                        <span class="arch-icon">📝</span>
+                        <div>
+                            <h4>Interview 面试服务</h4>
+                            <span class="port">:8082</span>
+                        </div>
+                    </div>
+                    <p>智能组卷 · 答题 · 评估触发</p>
+                </div>
+                <div class="arch-module ai">
+                    <div class="arch-module-header">
+                        <span class="arch-icon">🤖</span>
+                        <div>
+                            <h4>AI 评估服务</h4>
+                            <span class="port">:8083</span>
+                        </div>
+                    </div>
+                    <p>自动评分 · 报告生成</p>
+                </div>
+                <div class="arch-module common">
+                    <div class="arch-module-header">
+                        <span class="arch-icon">📦</span>
+                        <div>
+                            <h4>Common 公共模块</h4>
+                            <span class="port"></span>
+                        </div>
+                    </div>
+                    <p>工具类 · 异常 · DTO · 枚举</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术栈 -->
+    <section id="tech-stack" class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">🛠️ 技术栈</h2>
+            <p class="section-subtitle">前沿技术，稳定可靠</p>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="tech-badge">🏗️ 架构</span>
+                    <ul>
+                        <li>Spring Cloud 2023.0.0</li>
+                        <li>Spring Cloud Alibaba 2023.0.1.0</li>
+                        <li>Spring Boot 3.2.0</li>
+                        <li>Java 21</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">⚙️ 服务治理</span>
+                    <ul>
+                        <li>Nacos 2.3.0</li>
+                        <li>Spring Cloud Gateway</li>
+                        <li>Knife4j 4.4.0</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">💾 数据存储</span>
+                    <ul>
+                        <li>MyBatis-Plus 3.5.5</li>
+                        <li>MySQL 8.0</li>
+                        <li>Redis 7</li>
+                        <li>Redisson 3.24.3</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">🔒 安全</span>
+                    <ul>
+                        <li>BCrypt 密码加密</li>
+                        <li>JWT 无状态认证</li>
+                        <li>XSS 过滤防护</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">📨 消息队列</span>
+                    <ul>
+                        <li>RabbitMQ 3</li>
+                        <li>异步评估消息驱动</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速开始 -->
+    <section id="quick-start" class="quick-start">
+        <div class="container">
+            <h2 class="section-title">🚀 快速启动</h2>
+            <p class="section-subtitle">三步启动完整系统</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>启动基础设施</h3>
+                    <div class="code-block">
+                        <code>docker-compose -f docker/docker-compose.yml up -d</code>
+                    </div>
+                    <p>一键启动 MySQL、Redis、RabbitMQ、Nacos 等基础服务</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>初始化数据库</h3>
+                    <div class="code-block">
+                        <code>mysql -h localhost -P 3307 -u root -proot123 < smart-interview-common/src/main/resources/sql/init.sql</code>
+                    </div>
+                    <p>执行 SQL 脚本初始化数据结构</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>启动微服务</h3>
+                    <div class="code-block">
+                        <code>Gateway → User → Interview → AI</code>
+                    </div>
+                    <p>依次启动各微服务模块，即可通过 Gateway 8080 端口访问</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 测试账户 -->
+    <section class="accounts">
+        <div class="container">
+            <h2 class="section-title">🔑 测试账户</h2>
+            <p class="section-subtitle">快速体验系统各角色功能</p>
+            <div class="accounts-table-wrapper">
+                <table class="accounts-table">
+                    <thead>
+                        <tr>
+                            <th>角色</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="role-badge admin">管理员</span></td>
+                            <td><code>admin</code></td>
+                            <td><code>123456</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="role-badge interviewer">面试官</span></td>
+                            <td><code>interviewer01</code></td>
+                            <td><code>123456</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="role-badge candidate">求职者</span></td>
+                            <td><code>candidate01</code></td>
+                            <td><code>123456</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <span class="logo-icon">🧠</span>
+                    <span>Smart Interview Platform</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/liushuqi66/-2" target="_blank">GitHub</a>
+                    <a href="#features">功能</a>
+                    <a href="#quick-start">文档</a>
+                </div>
+                <p class="footer-copy">Zhang Wei &amp; Team &copy; 2026</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
